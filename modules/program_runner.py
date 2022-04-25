@@ -96,8 +96,7 @@ class ProgramRunner:
                 print(ErrorCodes.script_not_found)
                 print(f'{ErrorCodes.help_text}\n')
                 quit()
-            script_dir = os.path.join(self.__storage_dir, 'scripts')
-            os.system(f'{script_dir}/./{script_name}')
+            os.system(f'{self.__storage_dir}/./{script_name}')
         if args['del']:
             if script_name is None:
                 print(ErrorCodes.script_not_found)
@@ -107,8 +106,7 @@ class ProgramRunner:
                 .lower().strip()
             if inp == 'n':
                 quit()
-            script_path = os.path.join(self.__storage_dir, 'scripts',
-                script_name)
+            script_path = os.path.join(self.__storage_dir, script_name)
             os.remove(script_path)
             self.__config['scripts'].pop(path_key)
             self.save()
@@ -122,8 +120,7 @@ class ProgramRunner:
             else:
                 script_name = f'{uuid.uuid4()}.sh'
             self.__config['scripts'][path_key] = script_name
-            script_path = os.path.join(self.__storage_dir, 'scripts',
-                script_name)
+            script_path = os.path.join(self.__storage_dir, script_name)
             with open(script_path, 'w') as f:
                 f.write("echo 'Program Runner v0.1-alpha'\n")
                 f.write(f"echo 'Script Name: {script_name}'\n")
@@ -140,12 +137,10 @@ class ProgramRunner:
             if args['file']:
                 shutil.copyfile(args['file'], script_path)
             else:
-                script_path = os.path.join(self.__storage_dir, 'scripts',
-                    script_name)
+                script_path = os.path.join(self.__storage_dir, script_name)
                 os.system(f'vim {script_path}')
         if args['print']:
-            script_path = os.path.join(self.__storage_dir, 'scripts',
-                script_name)
+            script_path = os.path.join(self.__storage_dir, script_name)
             with open(script_path, 'r') as f:
                 print(f.read())
         
