@@ -29,7 +29,7 @@ To create and manage shell scripts for specific programs. Allows the user to sto
 ```
 @echo off
 echo.
-python <path of main.py> %1
+python <path of main.py> %*
 ```
 4. Run `pr --setup` to finish setup
 
